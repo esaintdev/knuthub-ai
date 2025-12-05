@@ -31,7 +31,7 @@ export default async function BrandsPage() {
                     </p>
                 </div>
                 <Link href="/brands/new">
-                    <Button size="lg">
+                    <Button className='bg-gradient-to-r from-purple-500 to-orange-300 hover:from-purple-600 hover:to-orange-400 text-white shadow-lg shadow-purple-500/20' size="lg">
                         <FiPlus className="mr-2" />
                         Create Brand
                     </Button>
@@ -39,8 +39,9 @@ export default async function BrandsPage() {
             </div>
 
             {!brands || brands.length === 0 ? (
-                <Card>
-                    <CardContent className="flex flex-col items-center justify-center py-16">
+                <Card className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50
+'>
+                    <CardContent className="flex flex-col items-center justify-center py-16 ">
                         <div className="text-center">
                             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                                 No brands yet
@@ -49,7 +50,7 @@ export default async function BrandsPage() {
                                 Create your first brand profile to start generating content
                             </p>
                             <Link href="/brands/new">
-                                <Button>
+                                <Button className='bg-gradient-to-r from-purple-500 to-orange-300 hover:from-purple-600 hover:to-orange-400 text-white shadow-lg shadow-purple-500/20'>
                                     <FiPlus className="mr-2" />
                                     Create Your First Brand
                                 </Button>
@@ -61,7 +62,7 @@ export default async function BrandsPage() {
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {brands.map((brand: any) => (
                         <Card key={brand.id} className="hover:shadow-lg transition-shadow">
-                            <CardHeader>
+                            <CardHeader className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm pb-2 rounded-t-2xl'>
                                 <div className="flex items-start justify-between">
                                     <div>
                                         <CardTitle className="text-xl">{brand.name}</CardTitle>
@@ -74,7 +75,7 @@ export default async function BrandsPage() {
                                     </span>
                                 </div>
                             </CardHeader>
-                            <CardContent className="space-y-4">
+                            <CardContent className="space-y-4 bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm pt-4 rounded-b-2xl">
                                 <div>
                                     <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                         Target Audience
@@ -85,13 +86,13 @@ export default async function BrandsPage() {
                                 </div>
                                 <div className="flex gap-2">
                                     <Link href={`/brands/${brand.id}/edit`} className="flex-1">
-                                        <Button variant="outline" className="w-full" size="sm">
+                                        <Button variant="outline" className="w-full bg-transparent hover:bg-white/10 text-gray-300 border-gray-700 hover:text-white" size="sm">
                                             <FiEdit className="mr-2 h-4 w-4" />
                                             Edit
                                         </Button>
                                     </Link>
                                     <Link href={`/generate?brandId=${brand.id}`} className="flex-1">
-                                        <Button className="w-full" size="sm">
+                                        <Button className="w-full bg-gradient-to-r from-purple-500 to-orange-300 hover:from-purple-600 hover:to-orange-400 text-white border-0 shadow-lg shadow-purple-500/20" size="sm">
                                             Generate
                                         </Button>
                                     </Link>

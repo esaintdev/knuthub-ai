@@ -22,8 +22,8 @@ export default async function Navbar() {
                     <div className="flex items-center gap-4">
                         {session ? (
                             <>
-                                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                                    <FiUser />
+                                <div className="flex items-center gap-2 text-sm text-gray-300">
+                                    <FiUser className="text-purple-400" />
                                     <span>{session.user?.email}</span>
                                 </div>
                                 <form
@@ -32,7 +32,7 @@ export default async function Navbar() {
                                         await signOut({ redirectTo: '/' })
                                     }}
                                 >
-                                    <Button type="submit" variant="ghost" size="sm">
+                                    <Button type="submit" variant="ghost" size="sm" className="text-gray-300 hover:text-white hover:bg-white/10">
                                         <FiLogOut className="mr-2" />
                                         Sign Out
                                     </Button>
@@ -41,10 +41,10 @@ export default async function Navbar() {
                         ) : (
                             <>
                                 <Link href="/login">
-                                    <Button variant="ghost">Sign In</Button>
+                                    <Button variant="ghost" className="text-white hover:text-purple-300 hover:bg-white/10">Sign In</Button>
                                 </Link>
                                 <Link href="/signup">
-                                    <Button className='bg-gradient-to-r from-purple-500 to-orange-300'>Get Started</Button>
+                                    <Button className='bg-gradient-to-r from-purple-500 to-orange-300 hover:from-purple-600 hover:to-orange-400 text-white border-0 transition-all shadow-lg shadow-purple-500/20'>Get Started</Button>
                                 </Link>
                             </>
                         )}

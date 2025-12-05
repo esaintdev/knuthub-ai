@@ -34,7 +34,7 @@ export default async function ContentPage() {
             </div>
 
             {!contents || contents.length === 0 ? (
-                <Card>
+                <Card className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50'>
                     <CardContent className="flex flex-col items-center justify-center py-16">
                         <div className="text-center">
                             <FiFileText className="h-12 w-12 text-gray-400 mx-auto mb-4" />
@@ -50,7 +50,7 @@ export default async function ContentPage() {
             ) : (
                 <div className="space-y-4">
                     {contents.map((content: any) => (
-                        <Card key={content.id} className="hover:shadow-md transition-shadow">
+                        <Card key={content.id} className="bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50 hover:shadow-md transition-shadow">
                             <CardHeader>
                                 <div className="flex items-start justify-between">
                                     <div className="flex-1">
@@ -60,18 +60,18 @@ export default async function ContentPage() {
                                         </CardDescription>
                                     </div>
                                     <div className="flex gap-2">
-                                        <span className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                                        <span className="inline-flex items-center rounded-full bg-blue-900/50 px-3 py-1 text-xs font-medium text-blue-200 border border-blue-800">
                                             {content.type}
                                         </span>
-                                        <span className="inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                                        <span className="inline-flex items-center rounded-full bg-purple-900/50 px-3 py-1 text-xs font-medium text-purple-200 border border-purple-800">
                                             {content.sub_type}
                                         </span>
                                     </div>
                                 </div>
                             </CardHeader>
                             <CardContent>
-                                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                                    <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-4 whitespace-pre-wrap">
+                                <div className="p-4 bg-black/40 border border-gray-800 rounded-lg">
+                                    <p className="text-sm text-gray-300 line-clamp-4 whitespace-pre-wrap">
                                         {content.content}
                                     </p>
                                 </div>

@@ -34,7 +34,7 @@ export default async function DashboardPage() {
     const plan = subscription?.plan as any
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-8 bg">
             <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
                     Dashboard
@@ -46,7 +46,8 @@ export default async function DashboardPage() {
 
             {/* Stats Grid */}
             <div className="grid gap-6 md:grid-cols-3">
-                <Card>
+                <Card className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50
+'>
                     <CardHeader>
                         <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
                             Brand Profiles
@@ -60,7 +61,7 @@ export default async function DashboardPage() {
                     </CardContent>
                 </Card>
 
-                <Card>
+                <Card className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50'>
                     <CardHeader>
                         <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
                             Content Generated
@@ -74,7 +75,7 @@ export default async function DashboardPage() {
                     </CardContent>
                 </Card>
 
-                <Card>
+                <Card className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50'>
                     <CardHeader>
                         <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
                             Monthly Usage
@@ -90,7 +91,7 @@ export default async function DashboardPage() {
             </div>
 
             {/* Current Plan */}
-            <Card>
+            <Card className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50'>
                 <CardHeader>
                     <CardTitle>Current Plan</CardTitle>
                     <CardDescription>Your active subscription</CardDescription>
@@ -129,7 +130,7 @@ export default async function DashboardPage() {
 
             {/* Quick Actions */}
             <div className="grid gap-6 md:grid-cols-2">
-                <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <Card className="bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50 hover:shadow-lg transition-shadow cursor-pointer hover:border-purple-500/50">
                     <Link href="/brands/new">
                         <CardHeader>
                             <div className="flex items-center gap-4">
@@ -145,7 +146,7 @@ export default async function DashboardPage() {
                     </Link>
                 </Card>
 
-                <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <Card className="bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50 hover:shadow-lg transition-shadow cursor-pointer hover:border-purple-500/50">
                     <Link href="/generate">
                         <CardHeader>
                             <div className="flex items-center gap-4">

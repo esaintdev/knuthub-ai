@@ -78,7 +78,7 @@ export default function NewBrandPage() {
             </div>
 
             <form onSubmit={handleSubmit}>
-                <Card>
+                <Card className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm'>
                     <CardHeader>
                         <CardTitle>Brand Information</CardTitle>
                         <CardDescription>
@@ -101,6 +101,7 @@ export default function NewBrandPage() {
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                 required
                                 disabled={loading}
+                                className="bg-black/20 border-gray-800 text-white placeholder:text-gray-500 focus:border-purple-500/50 focus:ring-purple-500/20"
                             />
                         </div>
 
@@ -108,14 +109,14 @@ export default function NewBrandPage() {
                             <Label htmlFor="niche">Industry/Niche *</Label>
                             <select
                                 id="niche"
-                                className="flex h-11 w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-2 text-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:bg-gray-900"
+                                className="flex h-11 w-full rounded-lg border border-gray-800 bg-black/20 px-4 py-2 text-sm text-white transition-colors focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 disabled:cursor-not-allowed disabled:opacity-50"
                                 value={formData.niche}
                                 onChange={(e) => setFormData({ ...formData, niche: e.target.value as BrandNiche })}
                                 required
                                 disabled={loading}
                             >
                                 {niches.map((niche) => (
-                                    <option key={niche.value} value={niche.value}>
+                                    <option key={niche.value} value={niche.value} className="bg-gray-900 text-white">
                                         {niche.label}
                                     </option>
                                 ))}
@@ -126,18 +127,27 @@ export default function NewBrandPage() {
                             <Label htmlFor="tone">Brand Tone *</Label>
                             <select
                                 id="tone"
-                                className="flex h-11 w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-2 text-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:bg-gray-900"
+                                className="flex h-11 w-full rounded-lg border border-gray-800 bg-black/20 px-4 py-2 text-sm text-white transition-colors focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 disabled:cursor-not-allowed disabled:opacity-50"
                                 value={formData.tone}
                                 onChange={(e) => setFormData({ ...formData, tone: e.target.value as BrandTone })}
                                 required
                                 disabled={loading}
                             >
                                 {tones.map((tone) => (
-                                    <option key={tone.value} value={tone.value}>
+                                    <option key={tone.value} value={tone.value} className="bg-gray-900 text-white">
                                         {tone.label}
                                     </option>
                                 ))}
                             </select>
+                        </div>
+
+                        <div className="space-y-4">
+                            <Label className="text-gray-300">Tips:</Label>
+                            <ul className="list-disc list-inside text-sm text-gray-400 space-y-1">
+                                <li>Be specific about your target audience</li>
+                                <li>Highlight what truly sets you apart</li>
+                                <li>Choose a tone that matches your brand personality</li>
+                            </ul>
                         </div>
 
                         <div className="space-y-2">
@@ -149,6 +159,7 @@ export default function NewBrandPage() {
                                 onChange={(e) => setFormData({ ...formData, targetAudience: e.target.value })}
                                 required
                                 disabled={loading}
+                                className="bg-black/20 border-gray-800 text-white placeholder:text-gray-500 focus:border-purple-500/50 focus:ring-purple-500/20 min-h-[100px]"
                             />
                         </div>
 
@@ -161,6 +172,7 @@ export default function NewBrandPage() {
                                 onChange={(e) => setFormData({ ...formData, usps: e.target.value })}
                                 required
                                 disabled={loading}
+                                className="bg-black/20 border-gray-800 text-white placeholder:text-gray-500 focus:border-purple-500/50 focus:ring-purple-500/20 min-h-[100px]"
                             />
                         </div>
 
@@ -173,6 +185,7 @@ export default function NewBrandPage() {
                                 onChange={(e) => setFormData({ ...formData, services: e.target.value })}
                                 required
                                 disabled={loading}
+                                className="bg-black/20 border-gray-800 text-white placeholder:text-gray-500 focus:border-purple-500/50 focus:ring-purple-500/20 min-h-[100px]"
                             />
                         </div>
 
@@ -184,6 +197,7 @@ export default function NewBrandPage() {
                                 value={formData.values}
                                 onChange={(e) => setFormData({ ...formData, values: e.target.value })}
                                 disabled={loading}
+                                className="bg-black/20 border-gray-800 text-white placeholder:text-gray-500 focus:border-purple-500/50 focus:ring-purple-500/20 min-h-[100px]"
                             />
                         </div>
 
@@ -193,11 +207,15 @@ export default function NewBrandPage() {
                                 variant="outline"
                                 onClick={() => router.back()}
                                 disabled={loading}
-                                className="flex-1"
+                                className="flex-1 bg-transparent hover:bg-white/10 text-gray-300 border-gray-700"
                             >
                                 Cancel
                             </Button>
-                            <Button type="submit" disabled={loading} className="flex-1">
+                            <Button
+                                type="submit"
+                                disabled={loading}
+                                className="flex-1 bg-gradient-to-r from-purple-500 to-orange-300 hover:from-purple-500 hover:to-orange-300 text-white border-0"
+                            >
                                 {loading ? 'Creating...' : 'Create Brand'}
                             </Button>
                         </div>

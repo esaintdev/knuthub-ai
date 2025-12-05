@@ -49,7 +49,7 @@ export default async function BillingPage() {
                 </p>
             </div>
 
-            <Card>
+            <Card className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50'>
                 <CardHeader>
                     <CardTitle>Current Plan</CardTitle>
                     <CardDescription>Your active subscription details</CardDescription>
@@ -57,10 +57,10 @@ export default async function BillingPage() {
                 <CardContent className="space-y-4">
                     <div className="flex items-center justify-between">
                         <div>
-                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                            <h3 className="text-2xl font-bold text-white">
                                 {plan?.name}
                             </h3>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                            <p className="text-sm text-gray-400">
                                 {formatCurrency(plan?.price || 0, plan?.currency || 'GBP')} / {plan?.interval}
                             </p>
                         </div>
@@ -103,7 +103,7 @@ export default async function BillingPage() {
                 </CardContent>
             </Card>
 
-            <Card>
+            <Card className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50'>
                 <CardHeader>
                     <CardTitle>Usage This Month</CardTitle>
                     <CardDescription>Track your content generation usage</CardDescription>
@@ -119,9 +119,9 @@ export default async function BillingPage() {
                             </span>
                         </div>
                         {usage.limit !== -1 && (
-                            <div className="w-full bg-gray-200 rounded-full h-3 dark:bg-gray-700">
+                            <div className="w-full bg-gray-800 rounded-full h-3 border border-gray-700">
                                 <div
-                                    className="bg-gradient-to-r from-blue-600 to-purple-600 h-3 rounded-full transition-all duration-300"
+                                    className="bg-gradient-to-r from-purple-600 to-orange-400 h-3 rounded-full transition-all duration-300 shadow-lg shadow-purple-500/20"
                                     style={{ width: `${Math.min(usage.percentage, 100)}%` }}
                                 />
                             </div>

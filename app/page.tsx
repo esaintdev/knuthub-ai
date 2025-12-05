@@ -124,142 +124,158 @@ export default function Home() {
       </section>
 
       {/* Pricing Preview */}
-      <section className="py-20 bg-transparent dark:bg-black/50">
+      <section className="py-20 bg-black">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-4xl font-bold text-white mb-4">
               Simple, Transparent Pricing
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400">
+            <p className="text-xl text-gray-300">
               Choose the plan that fits your business needs
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
+          <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
             {/* Starter */}
-            <Card className="border-2">
-              <CardHeader>
-                <CardTitle className="text-2xl">Starter</CardTitle>
+            <div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300">
+              <div className="mb-8">
+                <h3 className="text-2xl font-bold text-white mb-2">Starter</h3>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold text-gray-900 dark:text-white">£10</span>
-                  <span className="text-gray-600 dark:text-gray-400">/month</span>
+                  <span className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-orange-300 bg-clip-text text-transparent">£10</span>
+                  <span className="text-gray-400 text-lg">/month</span>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-2 text-sm">
-                    <FiCheck className="text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>50 content generations/month</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-sm">
-                    <FiCheck className="text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>1 brand profile</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-sm">
-                    <FiCheck className="text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>All content types</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-sm">
-                    <FiCheck className="text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>Email support</span>
-                  </li>
-                </ul>
-                <Link href="/signup">
-                  <Button variant="outline" className="w-full">Get Started</Button>
-                </Link>
-              </CardContent>
-            </Card>
+              </div>
 
-            {/* Professional */}
-            <Card className="border-2 border-blue-600 shadow-xl scale-105">
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3 text-gray-300">
+                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
+                  <span>50 content generations/month</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-300">
+                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
+                  <span>1 brand profile</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-300">
+                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
+                  <span>All content types</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-300">
+                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
+                  <span>Email support</span>
+                </li>
+              </ul>
+
+              <Link href="/signup">
+                <Button variant="outline" className="w-full border-purple-500/50 text-white hover:bg-purple-500/10">
+                  Get Started
+                </Button>
+              </Link>
+            </div>
+
+            {/* Professional - Featured */}
+            <div className="relative bg-gradient-to-br from-purple-900/40 to-orange-900/40 backdrop-blur-sm border-2 border-purple-500 rounded-2xl p-8 transform md:scale-105 shadow-2xl shadow-purple-500/20">
               <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-1 rounded-full text-sm font-medium">
+                <span className="bg-gradient-to-r from-purple-500 to-orange-300 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
                   Most Popular
                 </span>
               </div>
-              <CardHeader>
-                <CardTitle className="text-2xl">Professional</CardTitle>
+
+              <div className="mb-8">
+                <h3 className="text-2xl font-bold text-white mb-2">Professional</h3>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold text-gray-900 dark:text-white">£29</span>
-                  <span className="text-gray-600 dark:text-gray-400">/month</span>
+                  <span className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-orange-300 bg-clip-text text-transparent">£29</span>
+                  <span className="text-gray-300 text-lg">/month</span>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-2 text-sm">
-                    <FiCheck className="text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>200 content generations/month</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-sm">
-                    <FiCheck className="text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>3 brand profiles</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-sm">
-                    <FiCheck className="text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>All content types</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-sm">
-                    <FiCheck className="text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>Priority support</span>
-                  </li>
-                </ul>
-                <Link href="/signup">
-                  <Button className="w-full">Get Started</Button>
-                </Link>
-              </CardContent>
-            </Card>
+              </div>
+
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3 text-gray-200">
+                  <FiCheck className="text-orange-300 mt-1 flex-shrink-0 w-5 h-5" />
+                  <span>200 content generations/month</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-200">
+                  <FiCheck className="text-orange-300 mt-1 flex-shrink-0 w-5 h-5" />
+                  <span>3 brand profiles</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-200">
+                  <FiCheck className="text-orange-300 mt-1 flex-shrink-0 w-5 h-5" />
+                  <span>All content types</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-200">
+                  <FiCheck className="text-orange-300 mt-1 flex-shrink-0 w-5 h-5" />
+                  <span>Priority support</span>
+                </li>
+              </ul>
+
+              <Link href="/signup">
+                <Button className="w-full bg-gradient-to-r from-purple-500 to-orange-300 hover:from-purple-500 hover:to-orange-300 text-white font-semibold">
+                  Get Started
+                </Button>
+              </Link>
+            </div>
 
             {/* Business */}
-            <Card className="border-2">
-              <CardHeader>
-                <CardTitle className="text-2xl">Business</CardTitle>
+            <div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300">
+              <div className="mb-8">
+                <h3 className="text-2xl font-bold text-white mb-2">Business</h3>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold text-gray-900 dark:text-white">£49</span>
-                  <span className="text-gray-600 dark:text-gray-400">/month</span>
+                  <span className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-orange-300 bg-clip-text text-transparent">£49</span>
+                  <span className="text-gray-400 text-lg">/month</span>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-2 text-sm">
-                    <FiCheck className="text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>Unlimited generations</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-sm">
-                    <FiCheck className="text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>10 brand profiles</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-sm">
-                    <FiCheck className="text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>All content types</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-sm">
-                    <FiCheck className="text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>Priority support</span>
-                  </li>
-                </ul>
-                <Link href="/signup">
-                  <Button variant="outline" className="w-full">Get Started</Button>
-                </Link>
-              </CardContent>
-            </Card>
+              </div>
+
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3 text-gray-300">
+                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
+                  <span>Unlimited generations</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-300">
+                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
+                  <span>10 brand profiles</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-300">
+                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
+                  <span>All content types</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-300">
+                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
+                  <span>Priority support</span>
+                </li>
+              </ul>
+
+              <Link href="/signup">
+                <Button variant="outline" className="w-full border-purple-500/50 text-white hover:bg-purple-500/10">
+                  Get Started
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-black">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
+      <section className="relative py-24 overflow-hidden bg-black">
+        {/* Background Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px] -z-10" />
+
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h2 className="text-5xl font-bold text-white mb-6 font-manrope">
             Ready to Transform Your Marketing?
           </h2>
-          <p className="text-xl text-blue-100 mb-10">
-            Join hundreds of small businesses generating professional content with AI
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Join hundreds of small businesses generating professional content
+            <span className="text-purple-400 font-semibold"> 10x faster</span> with AI.
           </p>
           <Link href="/signup">
-            <Button size="lg" variant="outline" className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-6">
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-purple-600 to-orange-400 hover:from-purple-500 hover:to-orange-300 text-white text-xl px-12 py-8 rounded-full shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 hover:scale-105 transition-all duration-300"
+            >
               Start Your Free Trial
+              <FiZap className="ml-2 w-6 h-6" />
             </Button>
           </Link>
+          <p className="mt-4 text-sm text-gray-500">No credit card required · 14-day free trial</p>
         </div>
       </section>
 
@@ -267,7 +283,7 @@ export default function Home() {
       <footer className="bg-black border-t border-gray-200 dark:border-gray-800">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center text-gray-600 dark:text-gray-400">
-            <p>© 2024 KnutHub AI. All rights reserved.</p>
+            <p>© 2025 <span className="font-bold bg-gradient-to-r from-purple-500 to-orange-300 bg-clip-text text-transparent">KnutHub AI</span>. All rights reserved.</p>
           </div>
         </div>
       </footer>

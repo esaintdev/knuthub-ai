@@ -71,6 +71,16 @@ export async function POST(request: NextRequest) {
                 return NextResponse.json({ error: 'Invalid content type' }, { status: 400 })
         }
 
+        // Add strict formatting instructions
+        prompt += `
+        
+        CRITICAL FORMATTING INSTRUCTIONS:
+        1. OUTPUT RAW TEXT ONLY. Do NOT use Markdown characters like asterisks (**) for bolding, hashtags (#) for headers, or brackets.
+        2. Use emojis SPARINGLY (max 2-3 total) and only if clearly appropriate for the platform/tone.
+        3. Structure the text with clear paragraph breaks for readability. 
+        4. Do NOT include any meta-commentary (e.g. "Here is the content:", "Title:"). Return ONLY the final content body.
+        `
+
         // Generate content using Gemini
         const generatedText = await generateContentWithRetry(prompt)
 

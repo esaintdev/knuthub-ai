@@ -146,7 +146,7 @@ export default function GeneratePage() {
 
             <div className="grid gap-6 lg:grid-cols-2">
                 {/* Configuration Panel */}
-                <Card>
+                <Card className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50'>
                     <CardHeader>
                         <CardTitle>Content Settings</CardTitle>
                         <CardDescription>
@@ -169,13 +169,13 @@ export default function GeneratePage() {
                             ) : (
                                 <select
                                     id="brand"
-                                    className="flex h-11 w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-2 text-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:bg-gray-900"
+                                    className="flex h-11 w-full rounded-lg border border-gray-800 bg-black/20 px-4 py-2 text-sm text-white transition-colors focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 disabled:cursor-not-allowed disabled:opacity-50"
                                     value={selectedBrand}
                                     onChange={(e) => setSelectedBrand(e.target.value)}
                                     disabled={loading}
                                 >
                                     {brands.map((brand) => (
-                                        <option key={brand.id} value={brand.id}>
+                                        <option key={brand.id} value={brand.id} className='bg-gray-900 text-white'>
                                             {brand.name}
                                         </option>
                                     ))}
@@ -187,13 +187,13 @@ export default function GeneratePage() {
                             <Label htmlFor="contentType">Content Type</Label>
                             <select
                                 id="contentType"
-                                className="flex h-11 w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-2 text-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:bg-gray-900"
+                                className="flex h-11 w-full rounded-lg border border-gray-800 bg-black/20 px-4 py-2 text-sm text-white transition-colors focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 disabled:cursor-not-allowed disabled:opacity-50"
                                 value={contentType}
                                 onChange={(e) => setContentType(e.target.value)}
                                 disabled={loading}
                             >
                                 {contentTypes.map((type) => (
-                                    <option key={type.value} value={type.value}>
+                                    <option key={type.value} value={type.value} className='bg-gray-900 text-white'>
                                         {type.label}
                                     </option>
                                 ))}
@@ -204,13 +204,13 @@ export default function GeneratePage() {
                             <Label htmlFor="subType">Specific Type</Label>
                             <select
                                 id="subType"
-                                className="flex h-11 w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-2 text-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:bg-gray-900"
+                                className="flex h-11 w-full rounded-lg border border-gray-800 bg-black/20 px-4 py-2 text-sm text-white transition-colors focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 disabled:cursor-not-allowed disabled:opacity-50"
                                 value={subType}
                                 onChange={(e) => setSubType(e.target.value)}
                                 disabled={loading}
                             >
                                 {currentType?.subtypes.map((sub) => (
-                                    <option key={sub.value} value={sub.value}>
+                                    <option key={sub.value} value={sub.value} className='bg-gray-900 text-white'>
                                         {sub.label}
                                     </option>
                                 ))}
@@ -226,13 +226,14 @@ export default function GeneratePage() {
                                 onChange={(e) => setAdditionalContext(e.target.value)}
                                 disabled={loading}
                                 rows={4}
+                                className="bg-black/20 border-gray-800 text-white placeholder:text-gray-500 focus:border-purple-500/50 focus:ring-purple-500/20"
                             />
                         </div>
 
                         <Button
                             onClick={handleGenerate}
                             disabled={loading || brands.length === 0}
-                            className="w-full"
+                            className="w-full bg-gradient-to-r from-purple-500 to-orange-300 hover:from-purple-600 hover:to-orange-400 text-white border-0 shadow-lg shadow-purple-500/20"
                             size="lg"
                         >
                             <FiZap className="mr-2" />
@@ -242,7 +243,7 @@ export default function GeneratePage() {
                 </Card>
 
                 {/* Generated Content Panel */}
-                <Card>
+                <Card className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50'>
                     <CardHeader>
                         <div className="flex items-center justify-between">
                             <div>
@@ -256,6 +257,7 @@ export default function GeneratePage() {
                                     variant="outline"
                                     size="sm"
                                     onClick={handleCopy}
+                                    className="border-gray-700 text-gray-300 hover:text-white hover:bg-white/10"
                                 >
                                     {copied ? (
                                         <>
@@ -276,20 +278,20 @@ export default function GeneratePage() {
                         {loading ? (
                             <div className="flex items-center justify-center py-12">
                                 <div className="text-center">
-                                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                                    <p className="text-gray-600 dark:text-gray-400">
+                                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mb-4"></div>
+                                    <p className="text-gray-400">
                                         Generating your content...
                                     </p>
                                 </div>
                             </div>
                         ) : generatedContent ? (
                             <div className="space-y-4">
-                                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                                    <pre className="whitespace-pre-wrap text-sm text-gray-900 dark:text-gray-100 font-sans">
+                                <div className="p-4 bg-black/40 border border-gray-800 rounded-lg">
+                                    <pre className="whitespace-pre-wrap text-sm text-gray-100 font-sans">
                                         {generatedContent.content}
                                     </pre>
                                 </div>
-                                <div className="flex gap-2 text-xs text-gray-600 dark:text-gray-400">
+                                <div className="flex gap-2 text-xs text-gray-400">
                                     <span>Type: {generatedContent.type}</span>
                                     <span>•</span>
                                     <span>Subtype: {generatedContent.subType}</span>

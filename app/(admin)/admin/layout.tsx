@@ -25,33 +25,33 @@ export default async function AdminLayout({
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-black">
-            <nav className="border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+        <div className="min-h-screen bg-transparent">
+            <nav className="sticky top-0 z-50 border-b border-purple-800/30 bg-black/70 backdrop-blur-xl">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 items-center justify-between">
                         <div className="flex items-center gap-8">
-                            <h1 className="text-xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+                            <h1 className="text-xl font-bold bg-gradient-to-r from-purple-500 to-orange-300 bg-clip-text text-transparent font-manrope">
                                 Admin Panel
                             </h1>
                             <nav className="flex gap-6">
-                                <a href="/admin" className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                                <a href="/admin" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
                                     Dashboard
                                 </a>
-                                <a href="/admin/users" className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                                <a href="/admin/users" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
                                     Users
                                 </a>
-                                <a href="/admin/subscriptions" className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                                <a href="/admin/subscriptions" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
                                     Subscriptions
                                 </a>
-                                <a href="/admin/content" className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                                <a href="/admin/content" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
                                     Content
                                 </a>
-                                <a href="/admin/settings" className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                                <a href="/admin/settings" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
                                     Settings
                                 </a>
                             </nav>
                         </div>
-                        <a href="/dashboard" className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                        <a href="/dashboard" className="text-sm text-gray-400 hover:text-white transition-colors">
                             Back to App →
                         </a>
                     </div>
