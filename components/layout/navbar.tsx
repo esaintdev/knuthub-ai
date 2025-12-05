@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { auth, signOut } from '@/auth'
 import { Button } from '@/components/ui/button'
+import { supabase } from '@/lib/supabase'
 import { FiLogOut, FiUser } from 'react-icons/fi'
 
 export default async function Navbar() {
@@ -26,6 +27,24 @@ export default async function Navbar() {
                                     <FiUser className="text-purple-400" />
                                     <span>{session.user?.email}</span>
                                 </div>
+                                {await (async () => {
+                                    const { data: user } = await supabase
+                                        .from('users')
+                                        .select('role')
+                                        .eq('id', session.user.id)
+                                        .single()
+
+                                    if (user?.role === 'admin') {
+                                        return (
+                                            <Link href="/admin">
+                                                <Button variant="ghost" className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10">
+                                                    Admin
+                                                </Button>
+                                            </Link>
+                                        )
+                                    }
+                                    return null
+                                })()}
                                 <form
                                     action={async () => {
                                         'use server'

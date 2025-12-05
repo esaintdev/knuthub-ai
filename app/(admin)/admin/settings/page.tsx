@@ -36,7 +36,7 @@ export default function AdminSettingsPage() {
             </div>
 
             {/* General Settings */}
-            <Card>
+            <Card className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50'>
                 <CardHeader>
                     <CardTitle>General Settings</CardTitle>
                     <CardDescription>Basic platform configuration</CardDescription>
@@ -54,7 +54,7 @@ export default function AdminSettingsPage() {
                             id="maintenance"
                             checked={settings.maintenanceMode}
                             onChange={(e) => setSettings({ ...settings, maintenanceMode: e.target.checked })}
-                            className="h-5 w-5 rounded border-gray-300"
+                            className="h-5 w-5 rounded border-gray-700 bg-gray-800 text-purple-600 focus:ring-purple-500"
                         />
                     </div>
 
@@ -70,7 +70,7 @@ export default function AdminSettingsPage() {
                             id="signups"
                             checked={settings.allowSignups}
                             onChange={(e) => setSettings({ ...settings, allowSignups: e.target.checked })}
-                            className="h-5 w-5 rounded border-gray-300"
+                            className="h-5 w-5 rounded border-gray-700 bg-gray-800 text-purple-600 focus:ring-purple-500"
                         />
                     </div>
 
@@ -81,6 +81,7 @@ export default function AdminSettingsPage() {
                             type="number"
                             value={settings.maxFreeTrialDays}
                             onChange={(e) => setSettings({ ...settings, maxFreeTrialDays: parseInt(e.target.value) })}
+                            className="bg-black/20 border-gray-800 text-white focus:border-purple-500/50 focus:ring-purple-500/20"
                         />
                     </div>
 
@@ -90,53 +91,57 @@ export default function AdminSettingsPage() {
                             id="plan"
                             value={settings.defaultPlan}
                             onChange={(e) => setSettings({ ...settings, defaultPlan: e.target.value })}
-                            className="flex h-11 w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-2 text-sm"
+                            className="flex h-11 w-full rounded-lg border border-gray-800 bg-black/20 px-4 py-2 text-sm text-white focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20 outline-none"
                         >
-                            <option value="Starter">Starter</option>
-                            <option value="Professional">Professional</option>
-                            <option value="Business">Business</option>
+                            <option value="Starter" className="bg-gray-900">Starter</option>
+                            <option value="Professional" className="bg-gray-900">Professional</option>
+                            <option value="Business" className="bg-gray-900">Business</option>
                         </select>
                     </div>
 
-                    <Button onClick={handleSave} disabled={saving} className="w-full">
+                    <Button
+                        onClick={handleSave}
+                        disabled={saving}
+                        className="w-full bg-gradient-to-r from-purple-500 to-orange-300 hover:from-purple-600 hover:to-orange-400 text-white border-0 shadow-lg shadow-purple-500/20"
+                    >
                         {saving ? 'Saving...' : 'Save Settings'}
                     </Button>
                 </CardContent>
             </Card>
 
             {/* API Configuration */}
-            <Card>
+            <Card className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50'>
                 <CardHeader>
                     <CardTitle>API Configuration</CardTitle>
                     <CardDescription>Manage external service integrations</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-800 rounded-lg">
+                    <div className="flex items-center justify-between p-3 border border-gray-800 rounded-lg bg-black/20">
                         <div>
-                            <p className="font-medium text-gray-900 dark:text-white">Google Gemini AI</p>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">Content generation service</p>
+                            <p className="font-medium text-white">Google Gemini AI</p>
+                            <p className="text-sm text-gray-400">Content generation service</p>
                         </div>
-                        <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-200">
+                        <span className="inline-flex items-center rounded-full bg-green-900/30 px-2.5 py-0.5 text-xs font-medium text-green-200 border border-green-800">
                             Connected
                         </span>
                     </div>
 
-                    <div className="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-800 rounded-lg">
+                    <div className="flex items-center justify-between p-3 border border-gray-800 rounded-lg bg-black/20">
                         <div>
-                            <p className="font-medium text-gray-900 dark:text-white">Paystack</p>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">Payment processing</p>
+                            <p className="font-medium text-white">Paystack</p>
+                            <p className="text-sm text-gray-400">Payment processing</p>
                         </div>
-                        <span className="inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+                        <span className="inline-flex items-center rounded-full bg-yellow-900/30 px-2.5 py-0.5 text-xs font-medium text-yellow-200 border border-yellow-800">
                             Not Configured
                         </span>
                     </div>
 
-                    <div className="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-800 rounded-lg">
+                    <div className="flex items-center justify-between p-3 border border-gray-800 rounded-lg bg-black/20">
                         <div>
-                            <p className="font-medium text-gray-900 dark:text-white">Supabase</p>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">Database service</p>
+                            <p className="font-medium text-white">Supabase</p>
+                            <p className="text-sm text-gray-400">Database service</p>
                         </div>
-                        <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-200">
+                        <span className="inline-flex items-center rounded-full bg-green-900/30 px-2.5 py-0.5 text-xs font-medium text-green-200 border border-green-800">
                             Connected
                         </span>
                     </div>
@@ -144,7 +149,7 @@ export default function AdminSettingsPage() {
             </Card>
 
             {/* Danger Zone */}
-            <Card className="border-red-200 dark:border-red-800">
+            <Card className="bg-gradient-to-br from-red-950/30 to-black/90 backdrop-blur-sm border border-red-900/30">
                 <CardHeader>
                     <CardTitle className="text-red-600 dark:text-red-400">Danger Zone</CardTitle>
                     <CardDescription>Irreversible and destructive actions</CardDescription>
@@ -152,8 +157,8 @@ export default function AdminSettingsPage() {
                 <CardContent className="space-y-4">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="font-medium text-gray-900 dark:text-white">Clear All Content</p>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                            <p className="font-medium text-white">Clear All Content</p>
+                            <p className="text-sm text-gray-400">
                                 Delete all generated content from the database
                             </p>
                         </div>
@@ -164,8 +169,8 @@ export default function AdminSettingsPage() {
 
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="font-medium text-gray-900 dark:text-white">Reset All Subscriptions</p>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                            <p className="font-medium text-white">Reset All Subscriptions</p>
+                            <p className="text-sm text-gray-400">
                                 Cancel all active subscriptions
                             </p>
                         </div>
