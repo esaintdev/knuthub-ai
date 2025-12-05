@@ -44,6 +44,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     return null
                 }
 
+                // Check if user is banned
+                if (user.role === 'banned') {
+                    throw new Error('This account has been banned.')
+                }
+
                 return {
                     id: user.id,
                     email: user.email,
