@@ -13,8 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Knuthub AI | The AI Powered Content Workshop for Your Business",
-  description: "Knuthub AI helps small businesses create high quality content in minutes. Generate social posts, website copy",
+  title: "Knuthub AI | AI-Powered Content Workshop for Your Business",
+  description: "Knuthub AI helps small businesses create high-quality marketing content in minutes. Generate social posts, website copy, ads, and email sequences with AI.",
+  icons: {
+    icon: '/icon.png',
+  },
 };
 
 export default function RootLayout({
