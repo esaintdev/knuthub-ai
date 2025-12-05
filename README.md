@@ -1,10 +1,10 @@
-# AI Content Generation Platform
+# Knuthub AI - AI Content Generation Platform
 
 A full-featured SaaS platform that auto-generates marketing content (website copy, social posts, ads, email sequences) for small businesses using Google Gemini AI.
 
 ## Features
 
-- 🤖 **AI-Powered Content Generation** - Generate professional marketing content in seconds
+- 🤖 **AI-Powered Content Generation** - Generate professional marketing content in seconds using Google Gemini 2.5 Pro
 - 🎯 **Niche Targeting** - Specialized for churches, restaurants, salons, and chauffeur services
 - 📝 **Multiple Content Types**:
   - Website content (homepage, about, services, contact)
@@ -14,59 +14,51 @@ A full-featured SaaS platform that auto-generates marketing content (website cop
 - 🏢 **Brand Management** - Create and manage multiple brand profiles
 - 📊 **Usage Tracking** - Monitor your monthly content generation quota
 - 💳 **Subscription Plans** - Flexible pricing from £10-£49/month
+- 👨‍💼 **Admin Panel** - Comprehensive admin dashboard for platform management
 - 🎨 **Modern UI** - Beautiful, responsive design with dark mode support
 
 ## Tech Stack
 
-- **Framework**: Next.js 16 (App Router)
+- **Framework**: Next.js 16 (App Router) with Turbopack
 - **Language**: TypeScript
 - **Database**: PostgreSQL (Supabase)
-- **ORM**: Prisma
 - **Authentication**: NextAuth.js v5
-- **AI**: Google Gemini AI
+- **AI**: Google Gemini AI (`@google/genai`)
 - **Styling**: Tailwind CSS v4
 - **Icons**: React Icons
 
 ## Prerequisites
 
-Before you begin, ensure you have:
-
-- Node.js 18+ installed
+- Node.js 18.17+ installed
 - A Supabase account and project
 - A Google AI API key (for Gemini)
 - (Optional) Paystack account for payment processing
 
-## Setup Instructions
+## Quick Start
 
-### 1. Clone and Install Dependencies
+### 1. Install Dependencies
 
 ```bash
-cd /Users/mac/Documents/NextJs/ai-content
 npm install
 ```
 
 ### 2. Set Up Environment Variables
 
-Copy the example environment file:
-
-```bash
-cp env.example .env
-```
-
-Edit `.env` and add your credentials:
+Create a `.env` file in the root directory:
 
 ```env
-# Database (Get from Supabase)
-DATABASE_URL="postgresql://user:password@host:port/database?schema=public"
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL="your-supabase-url"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="your-supabase-anon-key"
 
-# NextAuth (Generate secret with: openssl rand -base64 32)
+# NextAuth (Generate with: openssl rand -base64 32)
 NEXTAUTH_SECRET="your-secret-key-here"
 NEXTAUTH_URL="http://localhost:3000"
 
 # Google Gemini AI
 GOOGLE_AI_API_KEY="your-google-ai-api-key"
 
-# Paystack (Optional for now)
+# Paystack (Optional)
 PAYSTACK_SECRET_KEY="sk_test_your_key"
 PAYSTACK_PUBLIC_KEY="pk_test_your_key"
 NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY="pk_test_your_key"
@@ -77,19 +69,22 @@ NEXT_PUBLIC_APP_URL="http://localhost:3000"
 
 ### 3. Set Up the Database
 
-Push the Prisma schema to your database:
+Run the SQL scripts in your Supabase SQL Editor:
+
+1. Run `supabase-schema.sql` - Creates all tables and relationships
+2. Run `supabase-admin-additions.sql` - Adds admin functionality
+
+### 4. Create an Admin User
+
+Run the helper script:
 
 ```bash
-npm run db:push
+node create-admin.js
 ```
 
-Seed the database with subscription plans:
+Follow the prompts, then copy the generated SQL and run it in Supabase SQL Editor.
 
-```bash
-npx prisma db seed
-```
-
-### 4. Run the Development Server
+### 5. Start the Development Server
 
 ```bash
 npm run dev
@@ -99,70 +94,54 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Getting Your API Keys
 
-### Supabase Database
+### Supabase
 
 1. Go to [supabase.com](https://supabase.com)
 2. Create a new project
-3. Go to Project Settings → Database
-4. Copy the connection string and add it to `DATABASE_URL`
+3. Go to Project Settings → API
+4. Copy the Project URL and anon/public key
 
 ### Google Gemini AI
 
-1. Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
+1. Go to [Google AI Studio](https://aistudio.google.com/apikey)
 2. Create an API key
 3. Add it to `GOOGLE_AI_API_KEY`
 
 ### Paystack (Optional)
 
 1. Go to [paystack.com](https://paystack.com)
-2. Sign up and get your test keys
-3. Add them to the Paystack environment variables
+2. Sign up and get your test keys from Settings → API Keys & Webhooks
 
 ## Usage
 
-### 1. Create an Account
+### For Users
 
-- Navigate to `/signup`
-- Create an account with email and password
-- You'll automatically get a 14-day trial with the Starter plan
+1. **Sign Up** - Create an account at `/signup`
+2. **Create Brand** - Add your business details in the Brands section
+3. **Generate Content** - Select brand, content type, and generate
+4. **View Library** - Access all generated content in Content Library
+5. **Manage Billing** - View subscription and usage in Billing
 
-### 2. Create a Brand Profile
+### For Admins
 
-- Go to "Brands" in the dashboard
-- Click "Create Brand"
-- Fill in your business details:
-  - Business name
-  - Industry/niche
-  - Brand tone
-  - Target audience
-  - Unique selling points
-  - Services/products
-
-### 3. Generate Content
-
-- Go to "Generate" in the dashboard
-- Select your brand
-- Choose content type (website, social, ads, email)
-- Choose specific type (e.g., Instagram post, homepage)
-- Add optional context
-- Click "Generate Content"
-- Copy and use your generated content!
-
-### 4. View Content Library
-
-- Go to "Content Library" to see all your generated content
-- Filter by type and brand
-- Edit or delete content as needed
+1. **Access Admin Panel** - Navigate to `/admin` (requires admin role)
+2. **Dashboard** - View platform statistics and metrics
+3. **User Management** - View and manage all users
+4. **Subscriptions** - Monitor all subscriptions and revenue
+5. **Content Moderation** - Review all generated content
+6. **Settings** - Configure platform settings
 
 ## Project Structure
 
 ```
 ai-content/
 ├── app/
+│   ├── (admin)/             # Admin panel pages
+│   │   └── admin/
 │   ├── (auth)/              # Authentication pages
 │   │   ├── login/
 │   │   └── signup/
-│   ├── (dashboard)/         # Protected dashboard pages
+│   ├── (dashboard)/         # User dashboard pages
 │   │   ├── dashboard/
 │   │   ├── brands/
 │   │   ├── generate/
@@ -173,8 +152,6 @@ ai-content/
 │   │   ├── brands/
 │   │   ├── content/
 │   │   └── generate/
-│   ├── globals.css
-│   ├── layout.tsx
 │   └── page.tsx             # Landing page
 ├── components/
 │   ├── layout/              # Layout components
@@ -182,28 +159,33 @@ ai-content/
 ├── lib/
 │   ├── prompts/             # AI prompt templates
 │   ├── gemini.ts            # Gemini AI integration
-│   ├── prisma.ts            # Prisma client
+│   ├── supabase.ts          # Supabase client
 │   ├── usage.ts             # Usage tracking
 │   └── utils.ts             # Utility functions
-├── prisma/
-│   ├── schema.prisma        # Database schema
-│   └── seed.ts              # Database seeding
 ├── types/
-│   └── index.ts             # TypeScript types
-└── middleware.ts            # Route protection
-
+│   └── next-auth.d.ts       # NextAuth type extensions
+├── supabase-schema.sql      # Database schema
+├── supabase-admin-additions.sql  # Admin features
+└── create-admin.js          # Admin user creator
 ```
 
 ## Database Schema
 
-The application uses the following main models:
+### Main Tables
 
-- **User** - User accounts and authentication
-- **Brand** - Business brand profiles
-- **Content** - Generated content pieces
-- **SubscriptionPlan** - Available subscription tiers
-- **Subscription** - User subscriptions
-- **Usage** - Monthly usage tracking
+- **users** - User accounts with role-based access
+- **brands** - Business brand profiles
+- **contents** - Generated content pieces
+- **subscription_plans** - Available subscription tiers
+- **subscriptions** - User subscriptions
+- **usage** - Monthly usage tracking
+
+### Key Features
+
+- Row Level Security (RLS) enabled
+- Automatic timestamps with triggers
+- Foreign key relationships
+- JSON metadata support
 
 ## Subscription Plans
 
@@ -214,42 +196,73 @@ The application uses the following main models:
 ## Development Commands
 
 ```bash
-# Run development server
-npm run dev
+# Development
+npm run dev          # Start dev server with Turbopack
+npm run build        # Build for production
+npm start            # Start production server
 
-# Build for production
-npm run build
-
-# Start production server
-npm start
-
-# Push database schema
-npm run db:push
-
-# Open Prisma Studio (database GUI)
-npm run db:studio
-
-# Seed database
-npx prisma db seed
-
-# Run linter
-npm run lint
+# Utilities
+npm run lint         # Run ESLint
+node create-admin.js # Create admin user
 ```
 
-## Next Steps
+## Admin Panel Features
 
-1. **Add Paystack Integration** - Implement payment processing for subscriptions
-2. **Email Verification** - Add email verification for new signups
-3. **Content Editing** - Add inline editing for generated content
-4. **Export Features** - Allow exporting content in various formats
-5. **Analytics** - Add usage analytics and insights
-6. **API Rate Limiting** - Implement rate limiting for API routes
-7. **Testing** - Add unit and integration tests
+- **Dashboard**: Platform statistics, recent users, system health
+- **User Management**: View all users, roles, and registration dates
+- **Subscription Management**: Track active subscriptions and MRR
+- **Content Moderation**: Review and manage all generated content
+- **System Settings**: Configure maintenance mode, API status, danger zone actions
+
+## Security Features
+
+- NextAuth.js v5 for authentication
+- Row Level Security (RLS) in Supabase
+- Role-based access control (admin/user)
+- Bcrypt password hashing
+- Protected API routes
+- Middleware for route protection
+
+## Migration Notes
+
+This project has been fully migrated from Prisma to direct Supabase integration:
+- All database queries use `@supabase/supabase-js`
+- Column naming follows PostgreSQL snake_case convention
+- Authentication uses NextAuth with Supabase backend
+- No Prisma dependencies remain
+
+## Troubleshooting
+
+### Content Generation Issues
+
+If content generation fails:
+1. Verify `GOOGLE_AI_API_KEY` is set correctly
+2. Check network connectivity to Google APIs
+3. Ensure model name is valid (`gemini-2.5-pro`)
+4. Review server logs for detailed error messages
+
+### Database Connection
+
+If database queries fail:
+1. Verify Supabase URL and anon key
+2. Check RLS policies are correctly set
+3. Ensure SQL scripts have been run
+4. Verify user has proper permissions
+
+## Future Enhancements
+
+- [ ] Paystack payment integration
+- [ ] Email verification for signups
+- [ ] Content export in multiple formats
+- [ ] Advanced analytics dashboard
+- [ ] API rate limiting
+- [ ] Automated testing suite
+- [ ] Multi-language support
 
 ## Support
 
-For issues or questions, please contact support or create an issue in the repository.
+For issues or questions, please create an issue in the repository.
 
 ## License
 
-© 2024 ContentAI. All rights reserved.
+© 2024 Knuthub AI. All rights reserved.
