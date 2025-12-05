@@ -70,85 +70,93 @@ export default function SignupPage() {
     }
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 px-4 py-12">
-            <Card className="w-full max-w-md">
-                <CardHeader className="space-y-1">
-                    <CardTitle className="text-3xl font-bold text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                        Create Account
-                    </CardTitle>
-                    <CardDescription className="text-center">
-                        Start generating amazing content for your business
-                    </CardDescription>
-                </CardHeader>
-                <form onSubmit={handleSubmit}>
-                    <CardContent className="space-y-4">
-                        {error && (
-                            <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg dark:bg-red-900/20 dark:border-red-800">
-                                {error}
+        <div className="flex min-h-screen items-center justify-center bg-black px-4 py-12">
+            <div className="w-full max-w-md space-y-6">
+                {/* Back to Home */}
+                <Link href="/" className="flex items-center justify-center gap-2 text-white hover:text-gray-300 transition-colors">
+                    <img src="/icon.png" alt="Knuthub AI" className="h-8 w-8" />
+                    <span className="text-xl font-bold font-manrope">Knuthub AI</span>
+                </Link>
+
+                <Card className="w-full max-w-md bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50">
+                    <CardHeader className="space-y-1">
+                        <CardTitle className="text-3xl font-bold text-center bg-gradient-to-r from-purple-500 to-orange-300 bg-clip-text text-transparent">
+                            Create Account
+                        </CardTitle>
+                        <CardDescription className="text-center">
+                            Start generating amazing content for your business
+                        </CardDescription>
+                    </CardHeader>
+                    <form onSubmit={handleSubmit}>
+                        <CardContent className="space-y-4">
+                            {error && (
+                                <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg dark:bg-red-900/20 dark:border-red-800">
+                                    {error}
+                                </div>
+                            )}
+                            <div className="space-y-2">
+                                <Label htmlFor="name">Full Name</Label>
+                                <Input
+                                    id="name"
+                                    type="text"
+                                    placeholder="John Doe"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    required
+                                    disabled={loading}
+                                />
                             </div>
-                        )}
-                        <div className="space-y-2">
-                            <Label htmlFor="name">Full Name</Label>
-                            <Input
-                                id="name"
-                                type="text"
-                                placeholder="John Doe"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                required
-                                disabled={loading}
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="email">Email</Label>
-                            <Input
-                                id="email"
-                                type="email"
-                                placeholder="you@example.com"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                                disabled={loading}
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="password">Password</Label>
-                            <Input
-                                id="password"
-                                type="password"
-                                placeholder="••••••••"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                                disabled={loading}
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="confirmPassword">Confirm Password</Label>
-                            <Input
-                                id="confirmPassword"
-                                type="password"
-                                placeholder="••••••••"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                required
-                                disabled={loading}
-                            />
-                        </div>
-                    </CardContent>
-                    <CardFooter className="flex flex-col space-y-4">
-                        <Button type="submit" className="w-full" size="lg" disabled={loading}>
-                            {loading ? 'Creating account...' : 'Create Account'}
-                        </Button>
-                        <p className="text-sm text-center text-gray-600 dark:text-gray-400">
-                            Already have an account?{' '}
-                            <Link href="/login" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400">
-                                Sign in
-                            </Link>
-                        </p>
-                    </CardFooter>
-                </form>
-            </Card>
+                            <div className="space-y-2">
+                                <Label htmlFor="email">Email</Label>
+                                <Input
+                                    id="email"
+                                    type="email"
+                                    placeholder="you@example.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                    disabled={loading}
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="password">Password</Label>
+                                <Input
+                                    id="password"
+                                    type="password"
+                                    placeholder="••••••••"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    disabled={loading}
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                                <Input
+                                    id="confirmPassword"
+                                    type="password"
+                                    placeholder="••••••••"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    required
+                                    disabled={loading}
+                                />
+                            </div>
+                        </CardContent>
+                        <CardFooter className="flex flex-col space-y-4">
+                            <Button type="submit" className="w-full bg-gradient-to-r from-purple-500 to-orange-300 hover:from-purple-500 hover:to-orange-300" size="lg" disabled={loading}>
+                                {loading ? 'Creating account...' : 'Create Account'}
+                            </Button>
+                            <p className="text-sm text-center text-gray-600 dark:text-gray-400">
+                                Already have an account?{' '}
+                                <Link href="/login" className="font-medium text-orange-300 hover:text-orange-300">
+                                    Sign in
+                                </Link>
+                            </p>
+                        </CardFooter>
+                    </form>
+                </Card>
+            </div>
         </div>
     )
 }

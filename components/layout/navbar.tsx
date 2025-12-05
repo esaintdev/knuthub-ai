@@ -7,12 +7,15 @@ export default async function Navbar() {
     const session = await auth()
 
     return (
-        <nav className="border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+        <nav className="sticky top-0 z-50 border-b border-purple-800/30 bg-black/70 backdrop-blur-xl">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex h-16 items-center justify-between">
+                <div className="flex h-20 items-center justify-between">
                     <div className="flex items-center">
-                        <Link href={session ? '/dashboard' : '/'} className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                            ContentAI
+                        <Link href={session ? '/dashboard' : '/'} className="flex items-center gap-2">
+                            <img src="/icon.png" alt="Knuthub AI" className="h-8 w-8" />
+                            <span className="text-2xl font-bold text-white font-manrope">
+                                Knuthub AI
+                            </span>
                         </Link>
                     </div>
 
@@ -41,7 +44,7 @@ export default async function Navbar() {
                                     <Button variant="ghost">Sign In</Button>
                                 </Link>
                                 <Link href="/signup">
-                                    <Button>Get Started</Button>
+                                    <Button className='bg-gradient-to-r from-purple-500 to-orange-300'>Get Started</Button>
                                 </Link>
                             </>
                         )}
