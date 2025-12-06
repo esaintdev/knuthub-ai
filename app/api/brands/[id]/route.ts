@@ -4,9 +4,10 @@ import { supabase } from '@/lib/supabase'
 
 export async function GET(
     req: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params
         const session = await auth()
 
         if (!session?.user?.id) {
@@ -16,7 +17,7 @@ export async function GET(
         const { data: brand, error } = await supabase
             .from('brands')
             .select('*')
-            .eq('id', params.id)
+            .eq('id', id)
             .eq('user_id', session.user.id)
             .single()
 
@@ -32,9 +33,10 @@ export async function GET(
 
 export async function PUT(
     req: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params
         const session = await auth()
 
         if (!session?.user?.id) {
@@ -48,7 +50,7 @@ export async function PUT(
         const { data: existingBrand } = await supabase
             .from('brands')
             .select('id')
-            .eq('id', params.id)
+            .eq('id', id)
             .eq('user_id', session.user.id)
             .single()
 
@@ -67,7 +69,7 @@ export async function PUT(
                 services,
                 values
             })
-            .eq('id', params.id)
+            .eq('id', id)
             .select()
             .single()
 
@@ -83,9 +85,10 @@ export async function PUT(
 
 export async function DELETE(
     req: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params
         const session = await auth()
 
         if (!session?.user?.id) {
@@ -96,7 +99,7 @@ export async function DELETE(
         const { data: brand } = await supabase
             .from('brands')
             .select('id')
-            .eq('id', params.id)
+            .eq('id', id)
             .eq('user_id', session.user.id)
             .single()
 
@@ -107,7 +110,7 @@ export async function DELETE(
         const { error } = await supabase
             .from('brands')
             .delete()
-            .eq('id', params.id)
+            .eq('id', id)
 
         if (error) {
             return NextResponse.json({ error: 'Failed to delete brand' }, { status: 500 })

@@ -4,9 +4,10 @@ import { supabase } from '@/lib/supabase'
 
 export async function GET(
     req: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params
         const session = await auth()
 
         if (!session?.user?.id) {
@@ -16,7 +17,7 @@ export async function GET(
         const { data: content, error } = await supabase
             .from('contents')
             .select('*')
-            .eq('id', params.id)
+            .eq('id', id)
             .eq('user_id', session.user.id)
             .single()
 
@@ -32,9 +33,10 @@ export async function GET(
 
 export async function PUT(
     req: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params
         const session = await auth()
 
         if (!session?.user?.id) {
@@ -48,7 +50,7 @@ export async function PUT(
         const { data: existingContent } = await supabase
             .from('contents')
             .select('id')
-            .eq('id', params.id)
+            .eq('id', id)
             .eq('user_id', session.user.id)
             .single()
 
@@ -63,7 +65,7 @@ export async function PUT(
                 content: contentText,
                 status
             })
-            .eq('id', params.id)
+            .eq('id', id)
             .select()
             .single()
 
@@ -79,9 +81,10 @@ export async function PUT(
 
 export async function DELETE(
     req: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params
         const session = await auth()
 
         if (!session?.user?.id) {
@@ -92,7 +95,7 @@ export async function DELETE(
         const { data: content } = await supabase
             .from('contents')
             .select('id')
-            .eq('id', params.id)
+            .eq('id', id)
             .eq('user_id', session.user.id)
             .single()
 
@@ -103,7 +106,7 @@ export async function DELETE(
         const { error } = await supabase
             .from('contents')
             .delete()
-            .eq('id', params.id)
+            .eq('id', id)
 
         if (error) {
             return NextResponse.json({ error: 'Failed to delete content' }, { status: 500 })
