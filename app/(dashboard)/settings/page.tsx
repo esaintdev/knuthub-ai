@@ -1,4 +1,8 @@
+import { auth } from '@/auth'
+import { redirect } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import DeletionRequestForm from '@/components/settings/deletion-request-form'
 
 export default async function SettingsPage() {
     const session = await auth()
