@@ -4,14 +4,31 @@ import { Button } from '@/components/ui/button'
 import { supabase } from '@/lib/supabase'
 import { FiLogOut, FiUser } from 'react-icons/fi'
 
+import MobileNav from '@/components/layout/mobile-nav'
+
 export default async function Navbar() {
     const session = await auth()
+
+    const { data: userRoleData } = await supabase
+        .from('users')
+        .select('role')
+        .eq('id', session?.user?.id || '')
+        .single()
+
+    const handleSignOut = async () => {
+        'use server'
+        await signOut({ redirectTo: '/' })
+    }
 
     return (
         <nav className="sticky top-0 z-50 border-b border-purple-800/30 bg-black/70 backdrop-blur-xl">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-20 items-center justify-between">
-                    <div className="flex items-center">
+                    <div className="flex items-center gap-3">
+                        <MobileNav
+                            user={{ email: session?.user?.email, role: userRoleData?.role }}
+                            onSignOut={handleSignOut}
+                        />
                         <Link href={session ? '/dashboard' : '/'} className="flex items-center gap-2">
                             <img src="/icon.png" alt="Knuthub AI" className="h-8 w-8" />
                             <span className="text-2xl font-bold text-white font-manrope">
@@ -22,50 +39,45 @@ export default async function Navbar() {
 
                     <div className="flex items-center gap-4">
                         {session ? (
-                            <>
+                            <div className="hidden lg:flex items-center gap-4">
                                 <div className="flex items-center gap-2 text-sm text-gray-300">
                                     <FiUser className="text-purple-400" />
                                     <span>{session.user?.email}</span>
                                 </div>
-                                {await (async () => {
-                                    const { data: user } = await supabase
-                                        .from('users')
-                                        .select('role')
-                                        .eq('id', session.user.id)
-                                        .single()
-
-                                    if (user?.role === 'admin') {
-                                        return (
-                                            <Link href="/admin">
-                                                <Button variant="ghost" className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10">
-                                                    Admin
-                                                </Button>
-                                            </Link>
-                                        )
-                                    }
-                                    return null
-                                })()}
-                                <form
-                                    action={async () => {
-                                        'use server'
-                                        await signOut({ redirectTo: '/' })
-                                    }}
-                                >
+                                {userRoleData?.role === 'admin' && (
+                                    <Link href="/admin">
+                                        <Button variant="ghost" className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10">
+                                            Admin
+                                        </Button>
+                                    </Link>
+                                )}
+                                <form action={handleSignOut}>
                                     <Button type="submit" variant="ghost" size="sm" className="text-gray-300 hover:text-white hover:bg-white/10">
                                         <FiLogOut className="mr-2" />
                                         Sign Out
                                     </Button>
                                 </form>
-                            </>
+                            </div>
                         ) : (
-                            <>
+                            <div className="hidden lg:flex items-center gap-4">
                                 <Link href="/login">
                                     <Button variant="ghost" className="text-white hover:text-purple-300 hover:bg-white/10">Sign In</Button>
                                 </Link>
                                 <Link href="/signup">
                                     <Button className='bg-gradient-to-r from-purple-500 to-orange-300 hover:from-purple-600 hover:to-orange-400 text-white border-0 transition-all shadow-lg shadow-purple-500/20'>Get Started</Button>
                                 </Link>
-                            </>
+                            </div>
+                        )}
+                        {/* Mobile Login Buttons if not logged in? */}
+                        {!session && (
+                            <div className="lg:hidden flex gap-2">
+                                <Link href="/login">
+                                    <Button size="sm" variant="ghost" className="text-white">Sign In</Button>
+                                </Link>
+                                <Link href="/signup">
+                                    <Button size="sm" className="bg-purple-600 text-white">Get Started</Button>
+                                </Link>
+                            </div>
                         )}
                     </div>
                 </div>
