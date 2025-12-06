@@ -40,7 +40,7 @@ export default function UpgradeButton({ planId, price, isCurrent, isLower }: Upg
 
     if (isCurrent) {
         return (
-            <Button disabled variant="secondary" className="w-full">
+            <Button disabled variant="outline" className="w-full bg-purple-500/20 border-purple-500/50 text-purple-200">
                 Current Plan
             </Button>
         )

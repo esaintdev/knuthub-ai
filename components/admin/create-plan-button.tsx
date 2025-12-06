@@ -141,7 +141,7 @@ export default function CreatePlanButton() {
                                 className="bg-black/20 border-gray-700 text-white"
                                 onKeyDown={(e) => e.key === 'Enter' && handleAddFeature()}
                             />
-                            <Button onClick={handleAddFeature} variant="secondary">Add</Button>
+                            <Button onClick={handleAddFeature} variant="outline">Add</Button>
                         </div>
                         <div className="space-y-2 mt-2">
                             {features.map((feature, index) => (
