@@ -7,7 +7,8 @@ import { usePathname } from 'next/navigation'
 import { signOut } from '@/auth'
 import { FiMenu, FiX, FiLogOut, FiUser, FiSettings } from 'react-icons/fi'
 import { cn } from '@/lib/utils'
-import { navigation } from '@/components/layout/sidebar'
+import { navigation as userNavigation } from '@/components/layout/sidebar'
+import { navigation as adminNavigation } from '@/components/layout/admin-sidebar'
 import { Button } from '@/components/ui/button'
 
 interface MobileNavProps {
@@ -86,7 +87,7 @@ export default function MobileNav({ user, onSignOut }: MobileNavProps) {
                         <div className="flex flex-col flex-1 py-8">
                             <div className="mt-2 flex-1 overflow-y-auto px-2">
                                 <nav className="space-y-1">
-                                    {navigation.map((item) => {
+                                    {(pathname.startsWith('/admin') ? adminNavigation : userNavigation).map((item) => {
                                         const Icon = item.icon
                                         const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
                                         return (

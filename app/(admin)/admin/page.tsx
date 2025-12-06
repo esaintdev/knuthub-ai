@@ -103,11 +103,11 @@ export default async function AdminDashboard() {
                     <div className="space-y-4">
                         {recentUsers?.map((user: any) => (
                             <div key={user.id} className="flex items-center justify-between border-b border-gray-800 pb-3 last:border-0">
-                                <div>
-                                    <p className="font-medium text-white">{user.name || 'No name'}</p>
-                                    <p className="text-sm text-gray-400">{user.email}</p>
+                                <div className="min-w-0 flex-1 mr-4">
+                                    <p className="font-medium text-white truncate">{user.name || 'No name'}</p>
+                                    <p className="text-sm text-gray-400 truncate">{user.email}</p>
                                 </div>
-                                <p className="text-sm text-gray-400">
+                                <p className="text-sm text-gray-400 whitespace-nowrap">
                                     {new Date(user.created_at).toLocaleDateString()}
                                 </p>
                             </div>

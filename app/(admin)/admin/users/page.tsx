@@ -32,7 +32,7 @@ export default async function AdminUsersPage() {
                     <CardDescription>View and manage user accounts</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto max-w-[85vw] sm:max-w-full">
                         <table className="w-full">
                             <thead>
                                 <tr className="border-b border-gray-800">

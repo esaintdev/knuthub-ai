@@ -31,9 +31,9 @@ export default async function Navbar() {
                         />
                         <Link href={session ? '/dashboard' : '/'} className="flex items-center gap-2">
                             <img src="/icon.png" alt="Knuthub AI" className="h-8 w-8" />
-                            <span className="text-2xl font-bold text-white font-manrope">
+                            {/* <span className="text-2xl font-bold text-white font-manrope">
                                 Knuthub AI
-                            </span>
+                            </span> */}
                         </Link>
                     </div>
 
@@ -69,7 +69,7 @@ export default async function Navbar() {
                             </div>
                         )}
                         {/* Mobile Login Buttons if not logged in? */}
-                        {!session && (
+                        {!session ? (
                             <div className="lg:hidden flex gap-2">
                                 <Link href="/login">
                                     <Button size="sm" variant="ghost" className="text-white">Sign In</Button>
@@ -77,6 +77,17 @@ export default async function Navbar() {
                                 <Link href="/signup">
                                     <Button size="sm" className="bg-purple-600 text-white">Get Started</Button>
                                 </Link>
+                            </div>
+                        ) : (
+                            <div className="lg:hidden flex gap-2 items-center">
+                                <Link href="/dashboard">
+                                    <Button size="sm" variant="ghost" className="text-white">Dashboard</Button>
+                                </Link>
+                                {userRoleData?.role === 'admin' && (
+                                    <Link href="/admin">
+                                        <Button size="sm" variant="ghost" className="text-purple-400">Admin</Button>
+                                    </Link>
+                                )}
                             </div>
                         )}
                     </div>

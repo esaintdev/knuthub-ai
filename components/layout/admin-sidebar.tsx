@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { FiHome, FiUsers, FiCreditCard, FiFileText, FiSettings, FiBox, FiUserX } from 'react-icons/fi'
 
-const navigation = [
+export const navigation = [
     { name: 'Dashboard', href: '/admin', icon: FiHome },
     { name: 'Users', href: '/admin/users', icon: FiUsers },
     { name: 'Plans', href: '/admin/plans', icon: FiBox },
