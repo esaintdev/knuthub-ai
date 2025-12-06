@@ -40,8 +40,11 @@ const contentTypes = [
     },
 ]
 
-export default function GeneratePage() {
+import { Suspense } from 'react'
+
+function GenerateForm() {
     const searchParams = useSearchParams()
+
     const preselectedBrandId = searchParams.get('brandId')
 
     const [brands, setBrands] = useState<any[]>([])
