@@ -46,7 +46,7 @@ export default async function DashboardPage() {
 
             {/* Upgrade CTA for Free Plan Users */}
             {plan?.name === 'Free' && (
-                <div className="bg-gradient-to-r from-purple-900/40 to-orange-900/40 border border-purple-500/30 rounded-lg p-6 relative overflow-hidden group">
+                <div className="bg-gradient-to-r from-purple-90 0/40 to-orange-900/40 border border-purple-500/30 rounded-lg p-6 relative overflow-hidden group">
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
                         <div>

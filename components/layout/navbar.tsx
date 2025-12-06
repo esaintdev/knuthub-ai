@@ -25,10 +25,10 @@ export default async function Navbar() {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-20 items-center justify-between">
                     <div className="flex items-center gap-3">
-                        {/* <MobileNav
+                        <MobileNav
                             user={{ email: session?.user?.email, role: userRoleData?.role }}
                             onSignOut={handleSignOut}
-                        /> */}
+                        />
                         <Link href={session ? '/dashboard' : '/'} className="flex items-center gap-2">
                             <img src="/icon.png" alt="Knuthub AI" className="h-8 w-8" />
                             <span className="text-2xl font-bold text-white font-manrope">

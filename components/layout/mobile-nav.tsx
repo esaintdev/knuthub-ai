@@ -22,6 +22,8 @@ export default function MobileNav({ user, onSignOut }: MobileNavProps) {
     const [isOpen, setIsOpen] = useState(false)
     const pathname = usePathname()
 
+    if (pathname === '/') return null
+
     // Close on route change
     useEffect(() => {
         setIsOpen(false)
@@ -73,16 +75,16 @@ export default function MobileNav({ user, onSignOut }: MobileNavProps) {
                         </div>
 
                         <div className="flex flex-shrink-0 items-center px-4">
-                            <img
+                            {/* <img
                                 className="h-8 w-auto"
                                 src="/icon.png"
                                 alt="Knuthub AI"
                             />
-                            <span className="ml-2 text-xl font-bold text-white font-manrope">Knuthub AI</span>
+                            <span className="ml-2 text-xl font-bold text-white font-manrope">Knuthub AI</span> */}
                         </div>
 
-                        <div className="flex flex-col flex-1 py-16">
-                            <div className="mt-10 flex-1 overflow-y-auto px-2">
+                        <div className="flex flex-col flex-1 py-8">
+                            <div className="mt-2 flex-1 overflow-y-auto px-2">
                                 <nav className="space-y-1">
                                     {navigation.map((item) => {
                                         const Icon = item.icon
