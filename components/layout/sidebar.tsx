@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { FiHome, FiTag, FiZap, FiFileText, FiCreditCard } from 'react-icons/fi'
+import { FiHome, FiTag, FiZap, FiFileText, FiCreditCard, FiSettings } from 'react-icons/fi'
 
 const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: FiHome },
@@ -11,6 +11,7 @@ const navigation = [
     { name: 'Generate', href: '/generate', icon: FiZap },
     { name: 'Content Library', href: '/content', icon: FiFileText },
     { name: 'Billing', href: '/billing', icon: FiCreditCard },
+    { name: 'Settings', href: '/settings', icon: FiSettings },
 ]
 
 export default function Sidebar() {

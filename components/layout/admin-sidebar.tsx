@@ -3,13 +3,15 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { FiHome, FiUsers, FiCreditCard, FiFileText, FiSettings } from 'react-icons/fi'
+import { FiHome, FiUsers, FiCreditCard, FiFileText, FiSettings, FiBox, FiUserX } from 'react-icons/fi'
 
 const navigation = [
     { name: 'Dashboard', href: '/admin', icon: FiHome },
     { name: 'Users', href: '/admin/users', icon: FiUsers },
+    { name: 'Plans', href: '/admin/plans', icon: FiBox },
     { name: 'Subscriptions', href: '/admin/subscriptions', icon: FiCreditCard },
     { name: 'Content', href: '/admin/content', icon: FiFileText },
+    { name: 'Requests', href: '/admin/requests', icon: FiUserX },
     { name: 'Settings', href: '/admin/settings', icon: FiSettings },
 ]
 

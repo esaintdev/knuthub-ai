@@ -1,13 +1,15 @@
 import { supabase } from '@/lib/supabase'
-import { getCurrentMonth } from './utils'
+import { getCurrentMonth, getCurrentDate } from './utils'
 
 export async function canGenerateContent(userId: string): Promise<{
     canGenerate: boolean
     reason?: string
     currentUsage: number
     limit: number
+    period: string
 }> {
     const currentMonth = getCurrentMonth()
+    const currentDate = getCurrentDate()
 
     // Get user's subscription and plan
     const { data: subscription } = await supabase
@@ -27,17 +29,22 @@ export async function canGenerateContent(userId: string): Promise<{
             canGenerate: false,
             reason: 'No active subscription found',
             currentUsage: 0,
-            limit: 0
+            limit: 0,
+            period: currentMonth
         }
     }
 
+    const planName = (subscription.plan as any).name
+    const isFree = planName === 'Free'
     const limit = (subscription.plan as any).generation_limit
+    const period = isFree ? currentDate : currentMonth
 
     if (limit === -1) {
         return {
             canGenerate: true,
             currentUsage: 0,
-            limit: -1
+            limit: -1,
+            period
         }
     }
 
@@ -46,7 +53,7 @@ export async function canGenerateContent(userId: string): Promise<{
         .from('usage')
         .select('generation_count')
         .eq('user_id', userId)
-        .eq('month', currentMonth)
+        .eq('month', period)
         .single()
 
     const currentUsage = usage?.generation_count || 0
@@ -54,28 +61,28 @@ export async function canGenerateContent(userId: string): Promise<{
     if (currentUsage >= limit) {
         return {
             canGenerate: false,
-            reason: `Monthly limit reached (${limit} generations)`,
+            reason: `${isFree ? 'Daily' : 'Monthly'} limit reached (${limit} generations)`,
             currentUsage,
-            limit
+            limit,
+            period
         }
     }
 
     return {
         canGenerate: true,
         currentUsage,
-        limit
+        limit,
+        period
     }
 }
 
-export async function incrementUsage(userId: string): Promise<void> {
-    const currentMonth = getCurrentMonth()
-
+export async function incrementUsage(userId: string, period: string): Promise<void> {
     // Check if usage record exists
     const { data: usage } = await supabase
         .from('usage')
         .select('id, generation_count')
         .eq('user_id', userId)
-        .eq('month', currentMonth)
+        .eq('month', period)
         .single()
 
     if (usage) {
@@ -88,7 +95,7 @@ export async function incrementUsage(userId: string): Promise<void> {
             .from('usage')
             .insert({
                 user_id: userId,
-                month: currentMonth,
+                month: period,
                 generation_count: 1
             })
     }
@@ -98,17 +105,22 @@ export async function getCurrentUsage(userId: string): Promise<{
     current: number
     limit: number
     percentage: number
+    isDayBased: boolean
 }> {
     const currentMonth = getCurrentMonth()
+    const currentDate = getCurrentDate()
 
     // Get subscription limit
     const { data: subscription } = await supabase
         .from('subscriptions')
-        .select('plan:subscription_plans(generation_limit)')
+        .select('plan:subscription_plans(name, generation_limit)')
         .eq('user_id', userId)
         .eq('status', 'active')
         .single()
 
+    const planName = (subscription?.plan as any)?.name
+    const isFree = planName === 'Free'
+    const period = isFree ? currentDate : currentMonth
     const limit = (subscription?.plan as any)?.generation_limit || 0
 
     // Get usage
@@ -116,7 +128,7 @@ export async function getCurrentUsage(userId: string): Promise<{
         .from('usage')
         .select('generation_count')
         .eq('user_id', userId)
-        .eq('month', currentMonth)
+        .eq('month', period)
         .single()
 
     const current = usage?.generation_count || 0
@@ -125,7 +137,8 @@ export async function getCurrentUsage(userId: string): Promise<{
     return {
         current,
         limit,
-        percentage
+        percentage,
+        isDayBased: isFree
     }
 }
 

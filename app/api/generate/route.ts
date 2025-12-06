@@ -111,7 +111,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Increment usage
-        await incrementUsage(session.user.id)
+        await incrementUsage(session.user.id, usageCheck.period)
 
         return NextResponse.json({
             success: true,

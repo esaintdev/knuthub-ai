@@ -4,88 +4,93 @@ import { auth } from '@/auth'
 import { supabase } from '@/lib/supabase'
 import { revalidatePath } from 'next/cache'
 
-export async function cancelSubscription(subscriptionId: string) {
+async function checkAdmin() {
+    const session = await auth()
+    if (!session?.user?.id) throw new Error('Unauthorized')
+
+    const { data: user } = await supabase
+        .from('users')
+        .select('role')
+        .eq('id', session.user.id)
+        .single()
+
+    if (user?.role !== 'admin') throw new Error('Unauthorized')
+    return true
+}
+
+export async function approveDeletion(requestId: string, userId: string) {
     try {
-        const session = await auth()
+        await checkAdmin()
 
-        // 1. Verify admin
-        if (!session?.user?.id) throw new Error('Unauthorized')
+        // 1. Delete user from 'users' table (Cascade should handle subscriptions, generations, etc.)
+        // Note: This does NOT delete from auth.users (Supabase Auth). 
+        // In a real app, you'd use the Supabase Admin API (service role) to delete from auth.users.
+        // For this task scope, deleting from public.users is the main "App Logic".
 
-        const { data: user } = await supabase
-            .from('users')
-            .select('role')
-            .eq('id', session.user.id)
-            .single()
+        // HOWEVER, if I delete the user row, the 'deletion_requests' row might be deleted too due to CASCADE?
+        // My SQL said: user_id UUID REFERENCES users(id) ON DELETE CASCADE
+        // So yes, approving it deletes the request record too.
+        // That effectively "closes" it.
 
-        if (user?.role !== 'admin') throw new Error('Unauthorized: Admin access required')
-
-        // 2. Update subscription status
         const { error } = await supabase
-            .from('subscriptions')
-            .update({
-                status: 'cancelled',
-                current_period_end: new Date().toISOString() // End immediately or keep period? Usually end at period, but for admin force cancel we might want immediate or just status change.
-                // Let's just set status to cancelled for now.
-            })
-            .eq('id', subscriptionId)
+            .from('users')
+            .delete()
+            .eq('id', userId)
+
+        if (error) {
+            console.error('Delete User Error:', error)
+            return { success: false, error: 'Failed to delete user' }
+        }
+
+        revalidatePath('/admin/requests')
+        return { success: true }
+    } catch (error) {
+        console.error('Approve Error:', error)
+        return { success: false, error: 'Failed to approve deletion' }
+    }
+}
+
+export async function rejectDeletion(requestId: string) {
+    try {
+        await checkAdmin()
+
+        const { error } = await supabase
+            .from('deletion_requests')
+            .update({ status: 'rejected' })
+            .eq('id', requestId)
 
         if (error) throw error
 
-        revalidatePath('/admin/subscriptions')
-        revalidatePath('/admin/users')
+        revalidatePath('/admin/requests')
         return { success: true }
     } catch (error) {
-        console.error('Error cancelling subscription:', error)
-        return { success: false, error: 'Failed to cancel subscription' }
+        console.error('Reject Error:', error)
+        return { success: false, error: 'Failed to reject deletion' }
     }
 }
 
 export async function deleteUser(userId: string) {
     try {
-        const session = await auth()
-        if (!session?.user?.id) throw new Error('Unauthorized')
+        await checkAdmin()
 
-        // Check admin role
-        const { data: adminUser } = await supabase
+        const { error } = await supabase
             .from('users')
-            .select('role')
-            .eq('id', session.user.id)
-            .single()
-
-        if (adminUser?.role !== 'admin') throw new Error('Unauthorized')
-
-        // Prevent self-deletion
-        if (userId === session.user.id) throw new Error('Cannot delete your own admin account')
-
-        // Delete user (cascade should handle related data if set up, otherwise we might need manual cleanup)
-        // Check if cascade is enabled? Assuming yes or manual delete needed. 
-        // Let's try direct delete. If foreign keys fail, we might need to delete related first.
-        // Usually Supabase sets cascade on user_id relations.
-        const { error } = await supabase.from('users').delete().eq('id', userId)
+            .delete()
+            .eq('id', userId)
 
         if (error) throw error
 
         revalidatePath('/admin/users')
         return { success: true }
     } catch (error) {
-        console.error('Error deleting user:', error)
-        return { success: false, error: 'Failed to delete user' }
+        console.error('Delete Error:', error)
+        return { success: false, error: 'Failed' }
     }
 }
 
 export async function banUser(userId: string) {
     try {
-        const session = await auth()
-        if (!session?.user?.id) throw new Error('Unauthorized')
-
-        const { data: adminUser } = await supabase
-            .from('users')
-            .select('role')
-            .eq('id', session.user.id)
-            .single()
-
-        if (adminUser?.role !== 'admin') throw new Error('Unauthorized')
-        if (userId === session.user.id) throw new Error('Cannot ban your own admin account')
+        await checkAdmin()
 
         const { error } = await supabase
             .from('users')
@@ -97,27 +102,18 @@ export async function banUser(userId: string) {
         revalidatePath('/admin/users')
         return { success: true }
     } catch (error) {
-        console.error('Error banning user:', error)
-        return { success: false, error: 'Failed to ban user' }
+        console.error('Ban Error:', error)
+        return { success: false, error: 'Failed' }
     }
 }
 
 export async function activateUser(userId: string) {
     try {
-        const session = await auth()
-        if (!session?.user?.id) throw new Error('Unauthorized')
-
-        const { data: adminUser } = await supabase
-            .from('users')
-            .select('role')
-            .eq('id', session.user.id)
-            .single()
-
-        if (adminUser?.role !== 'admin') throw new Error('Unauthorized')
+        await checkAdmin()
 
         const { error } = await supabase
             .from('users')
-            .update({ role: 'user' }) // Default back to 'user'. If they were admin before, they lose it. Safer.
+            .update({ role: 'user' }) // Default to user
             .eq('id', userId)
 
         if (error) throw error
@@ -125,23 +121,14 @@ export async function activateUser(userId: string) {
         revalidatePath('/admin/users')
         return { success: true }
     } catch (error) {
-        console.error('Error activating user:', error)
-        return { success: false, error: 'Failed to activate user' }
+        console.error('Activate Error:', error)
+        return { success: false, error: 'Failed' }
     }
 }
 
-export async function updateUser(userId: string, data: { name?: string; email?: string; role?: string }) {
+export async function updateUser(userId: string, data: { name: string, email: string, role: string }) {
     try {
-        const session = await auth()
-        if (!session?.user?.id) throw new Error('Unauthorized')
-
-        const { data: adminUser } = await supabase
-            .from('users')
-            .select('role')
-            .eq('id', session.user.id)
-            .single()
-
-        if (adminUser?.role !== 'admin') throw new Error('Unauthorized')
+        await checkAdmin()
 
         const { error } = await supabase
             .from('users')
@@ -153,7 +140,26 @@ export async function updateUser(userId: string, data: { name?: string; email?: 
         revalidatePath('/admin/users')
         return { success: true }
     } catch (error) {
-        console.error('Error updating user:', error)
-        return { success: false, error: 'Failed to update user' }
+        console.error('Update Error:', error)
+        return { success: false, error: 'Failed' }
+    }
+}
+
+export async function cancelSubscription(subscriptionId: string) {
+    try {
+        await checkAdmin()
+
+        const { error } = await supabase
+            .from('subscriptions')
+            .update({ status: 'cancelled' })
+            .eq('id', subscriptionId)
+
+        if (error) throw error
+
+        revalidatePath('/admin/subscriptions')
+        return { success: true }
+    } catch (error) {
+        console.error('Cancel Subscription Error:', error)
+        return { success: false, error: 'Failed' }
     }
 }

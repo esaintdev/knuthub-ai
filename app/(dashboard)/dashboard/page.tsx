@@ -44,6 +44,26 @@ export default async function DashboardPage() {
                 </p>
             </div>
 
+            {/* Upgrade CTA for Free Plan Users */}
+            {plan?.name === 'Free' && (
+                <div className="bg-gradient-to-r from-purple-900/40 to-orange-900/40 border border-purple-500/30 rounded-lg p-6 relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
+                        <div>
+                            <h3 className="text-xl font-bold text-white mb-2">⚡ Unlock Unlimited Potential</h3>
+                            <p className="text-gray-300">
+                                You are currently on the Free plan (3 generations/day). Upgrade to Pro for unlimited content generation and premium features.
+                            </p>
+                        </div>
+                        <Link href="/billing">
+                            <Button className="bg-gradient-to-r from-purple-600 to-orange-400 hover:from-purple-500 hover:to-orange-300 text-white border-0 shadow-lg shadow-purple-500/20 whitespace-nowrap">
+                                Upgrade Plan
+                            </Button>
+                        </Link>
+                    </div>
+                </div>
+            )}
+
             {/* Stats Grid */}
             <div className="grid gap-6 md:grid-cols-3">
                 <Card className='bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50

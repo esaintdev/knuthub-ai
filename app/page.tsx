@@ -135,33 +135,29 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
             {/* Starter */}
-            <div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300">
-              <div className="mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2">Starter</h3>
+            <div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300">
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-white mb-2">Starter</h3>
                 <div className="mt-4">
-                  <span className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-orange-300 bg-clip-text text-transparent">£10</span>
-                  <span className="text-gray-400 text-lg">/month</span>
+                  <span className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-orange-300 bg-clip-text text-transparent">£10</span>
+                  <span className="text-gray-400 text-sm">/month</span>
                 </div>
               </div>
 
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-start gap-3 text-gray-300">
-                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
-                  <span>50 content generations/month</span>
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start gap-2 text-sm text-gray-300">
+                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-4 h-4" />
+                  <span>15 content generations/month</span>
                 </li>
-                <li className="flex items-start gap-3 text-gray-300">
-                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
+                <li className="flex items-start gap-2 text-sm text-gray-300">
+                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-4 h-4" />
                   <span>1 brand profile</span>
                 </li>
-                <li className="flex items-start gap-3 text-gray-300">
-                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
+                <li className="flex items-start gap-2 text-sm text-gray-300">
+                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-4 h-4" />
                   <span>All content types</span>
-                </li>
-                <li className="flex items-start gap-3 text-gray-300">
-                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
-                  <span>Email support</span>
                 </li>
               </ul>
 
@@ -172,37 +168,65 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Professional - Featured */}
-            <div className="relative bg-gradient-to-br from-purple-900/40 to-orange-900/40 backdrop-blur-sm border-2 border-purple-500 rounded-2xl p-8 transform md:scale-105 shadow-2xl shadow-purple-500/20">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                <span className="bg-gradient-to-r from-purple-500 to-orange-300 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
+            {/* Professional */}
+            <div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300">
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-white mb-2">Professional</h3>
+                <div className="mt-4">
+                  <span className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-orange-300 bg-clip-text text-transparent">£29</span>
+                  <span className="text-gray-400 text-sm">/month</span>
+                </div>
+              </div>
+
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start gap-2 text-sm text-gray-300">
+                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-4 h-4" />
+                  <span>35 content generations/month</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-300">
+                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-4 h-4" />
+                  <span>3 brand profiles</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-300">
+                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-4 h-4" />
+                  <span>Priority support</span>
+                </li>
+              </ul>
+
+              <Link href="/signup">
+                <Button variant="outline" className="w-full border-purple-500/50 text-white hover:bg-purple-500/10">
+                  Get Started
+                </Button>
+              </Link>
+            </div>
+
+            {/* Business */}
+            <div className="relative bg-gradient-to-br from-purple-900/40 to-orange-900/40 backdrop-blur-sm border-2 border-purple-500 rounded-2xl p-6 transform md:scale-105 z-10 shadow-2xl shadow-purple-500/20">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span className="bg-gradient-to-r from-purple-500 to-orange-300 text-white px-4 py-1 rounded-full text-xs font-bold shadow-lg">
                   Most Popular
                 </span>
               </div>
 
-              <div className="mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2">Professional</h3>
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-white mb-2">Business</h3>
                 <div className="mt-4">
-                  <span className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-orange-300 bg-clip-text text-transparent">£29</span>
-                  <span className="text-gray-300 text-lg">/month</span>
+                  <span className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-orange-300 bg-clip-text text-transparent">£49</span>
+                  <span className="text-gray-300 text-sm">/month</span>
                 </div>
               </div>
 
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-start gap-3 text-gray-200">
-                  <FiCheck className="text-orange-300 mt-1 flex-shrink-0 w-5 h-5" />
-                  <span>200 content generations/month</span>
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start gap-2 text-sm text-gray-200">
+                  <FiCheck className="text-orange-300 mt-1 flex-shrink-0 w-4 h-4" />
+                  <span>85 content generations/month</span>
                 </li>
-                <li className="flex items-start gap-3 text-gray-200">
-                  <FiCheck className="text-orange-300 mt-1 flex-shrink-0 w-5 h-5" />
-                  <span>3 brand profiles</span>
+                <li className="flex items-start gap-2 text-sm text-gray-200">
+                  <FiCheck className="text-orange-300 mt-1 flex-shrink-0 w-4 h-4" />
+                  <span>25 brand profiles</span>
                 </li>
-                <li className="flex items-start gap-3 text-gray-200">
-                  <FiCheck className="text-orange-300 mt-1 flex-shrink-0 w-5 h-5" />
-                  <span>All content types</span>
-                </li>
-                <li className="flex items-start gap-3 text-gray-200">
-                  <FiCheck className="text-orange-300 mt-1 flex-shrink-0 w-5 h-5" />
+                <li className="flex items-start gap-2 text-sm text-gray-200">
+                  <FiCheck className="text-orange-300 mt-1 flex-shrink-0 w-4 h-4" />
                   <span>Priority support</span>
                 </li>
               </ul>
@@ -214,38 +238,34 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Business */}
-            <div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300">
-              <div className="mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2">Business</h3>
+            {/* Gold */}
+            <div className="relative bg-gradient-to-br from-yellow-900/40 to-amber-900/40 backdrop-blur-sm border border-yellow-500/50 rounded-2xl p-6 hover:border-yellow-400 transaction-all duration-300">
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-yellow-400 mb-2">Gold</h3>
                 <div className="mt-4">
-                  <span className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-orange-300 bg-clip-text text-transparent">£49</span>
-                  <span className="text-gray-400 text-lg">/month</span>
+                  <span className="text-4xl font-bold text-yellow-400">£99</span>
+                  <span className="text-gray-400 text-sm">/month</span>
                 </div>
               </div>
 
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-start gap-3 text-gray-300">
-                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start gap-2 text-sm text-gray-300">
+                  <FiCheck className="text-yellow-500 mt-1 flex-shrink-0 w-4 h-4" />
                   <span>Unlimited generations</span>
                 </li>
-                <li className="flex items-start gap-3 text-gray-300">
-                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
-                  <span>10 brand profiles</span>
+                <li className="flex items-start gap-2 text-sm text-gray-300">
+                  <FiCheck className="text-yellow-500 mt-1 flex-shrink-0 w-4 h-4" />
+                  <span>Unlimited brand profiles</span>
                 </li>
-                <li className="flex items-start gap-3 text-gray-300">
-                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
-                  <span>All content types</span>
-                </li>
-                <li className="flex items-start gap-3 text-gray-300">
-                  <FiCheck className="text-purple-400 mt-1 flex-shrink-0 w-5 h-5" />
-                  <span>Priority support</span>
+                <li className="flex items-start gap-2 text-sm text-gray-300">
+                  <FiCheck className="text-yellow-500 mt-1 flex-shrink-0 w-4 h-4" />
+                  <span>24/7 Dedicated Support</span>
                 </li>
               </ul>
 
               <Link href="/signup">
-                <Button variant="outline" className="w-full border-purple-500/50 text-white hover:bg-purple-500/10">
-                  Get Started
+                <Button variant="outline" className="w-full border-yellow-500/50 text-yellow-400 hover:bg-yellow-500/10 hover:text-yellow-300">
+                  Get Ultimate
                 </Button>
               </Link>
             </div>
