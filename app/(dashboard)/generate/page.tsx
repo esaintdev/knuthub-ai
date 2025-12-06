@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
@@ -39,8 +39,6 @@ const contentTypes = [
         ]
     },
 ]
-
-import { Suspense } from 'react'
 
 function GenerateForm() {
     const searchParams = useSearchParams()
@@ -314,5 +312,13 @@ function GenerateForm() {
                 </Card>
             </div>
         </div>
+    )
+}
+
+export default function GeneratePage() {
+    return (
+        <Suspense fallback={<div className="p-8 text-center text-gray-500">Loading generator...</div>}>
+            <GenerateForm />
+        </Suspense>
     )
 }
